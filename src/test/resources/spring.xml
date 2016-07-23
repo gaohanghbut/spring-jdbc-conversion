@@ -11,12 +11,12 @@
     <jdbc:script location="classpath:sql/create-table.sql"/>
   </jdbc:embedded-database>
 
-  <bean class="cn.yxffcode.jdbc.NamedParameterJdbcTemplate">
+  <bean class="cn.yxffcode.jdbc.typehandler.NamedParameterJdbcTemplate">
     <constructor-arg index="0" ref="dataSource"/>
     <constructor-arg index="1" ref="typeHandlerRegistry"/>
   </bean>
 
-  <bean name="typeHandlerRegistry" class="cn.yxffcode.jdbc.DefaultTypeHandlerRegistry">
+  <bean name="typeHandlerRegistry" class="cn.yxffcode.jdbc.typehandler.DefaultTypeHandlerRegistry">
     <property name="typeHandlers">
       <list>
         <bean class="cn.yxffcode.jdbc.TestEnumTypeHandler"/>

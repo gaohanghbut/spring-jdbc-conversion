@@ -1,5 +1,7 @@
 package cn.yxffcode.jdbc;
 
+import cn.yxffcode.jdbc.typehandler.TypeHandler;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

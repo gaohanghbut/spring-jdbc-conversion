@@ -1,5 +1,6 @@
 package cn.yxffcode.jdbc;
 
+import cn.yxffcode.jdbc.typehandler.ParamMap;
 import org.junit.Assert;
 import org.junit.Test;
 

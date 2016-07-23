@@ -1,4 +1,4 @@
-package cn.yxffcode.jdbc;
+package cn.yxffcode.jdbc.typehandler;
 
 import com.google.common.collect.Maps;
 import com.google.common.reflect.TypeToken;

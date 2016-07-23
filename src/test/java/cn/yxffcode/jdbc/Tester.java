@@ -1,5 +1,9 @@
 package cn.yxffcode.jdbc;
 
+import cn.yxffcode.jdbc.typehandler.MappingRowMapper;
+import cn.yxffcode.jdbc.typehandler.NamedParameterJdbcTemplate;
+import cn.yxffcode.jdbc.typehandler.ParamMap;
+import cn.yxffcode.jdbc.typehandler.TypeHandlerRegistry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

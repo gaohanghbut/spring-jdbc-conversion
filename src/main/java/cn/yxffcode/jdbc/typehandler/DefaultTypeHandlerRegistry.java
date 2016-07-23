@@ -1,4 +1,4 @@
-package cn.yxffcode.jdbc;
+package cn.yxffcode.jdbc.typehandler;
 
 import com.google.common.collect.Maps;
 
@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkState;
-import static javafx.scene.input.KeyCode.T;
 
 /**
  * @author gaohang on 7/22/16.
