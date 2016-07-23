@@ -23,4 +23,6 @@
       </list>
     </property>
   </bean>
+
+  <bean class="ConfigurableMappingRowMap"></bean>
 </beans>

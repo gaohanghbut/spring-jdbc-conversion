@@ -1,13 +1,11 @@
 package cn.yxffcode.jdbc;
 
-import com.google.common.collect.Maps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -25,12 +23,12 @@ public class Tester {
 
   @Test
   public void test() {
-    HashMap<String, Object> params = Maps.newHashMap();
-    params.put("id", TestEnum.B);
-    params.put("name", "gaohang");
-    namedParameterJdbcTemplate.update("insert into user (id, name) values (:id, :name)", params);
+    User user = new User();
+    user.setId(TestEnum.B);
+    user.setName("gaohang");
+    namedParameterJdbcTemplate.update("insert into user (id, name) values (:id, :name)", ParamMap.fromNotNull(user));
 
-    List<User> users = namedParameterJdbcTemplate.query("select * from user", new MappingRowMap<User>(typeHandlerRegistry) {
+    List<User> users = namedParameterJdbcTemplate.query("select * from user", new MappingRowMapper<User>(typeHandlerRegistry) {
       @Override
       protected void configMapping() {
         addMapping("id", "id");
@@ -39,5 +37,4 @@ public class Tester {
     });
     System.out.println(users);
   }
-
 }
