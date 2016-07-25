@@ -14,14 +14,14 @@ import java.util.Map;
 /**
  * @author gaohang on 7/22/16.
  */
-public abstract class MappingRowMapper<T> extends TypeToken<T> implements RowMapper<T> {
+public abstract class ResultMap<T> extends TypeToken<T> implements RowMapper<T> {
 
   private final TypeHandlerRegistry typeHandlerRegistry;
   private final Class<T> type;
 
   private final Map<String, String> property2ColumnMap = Maps.newHashMap();
 
-  public MappingRowMapper(TypeHandlerRegistry typeHandlerRegistry) {
+  public ResultMap(TypeHandlerRegistry typeHandlerRegistry) {
     this.typeHandlerRegistry = typeHandlerRegistry;
     this.type = (Class<T>) getType();
     configMapping();

@@ -1,6 +1,6 @@
 package cn.yxffcode.jdbc;
 
-import cn.yxffcode.jdbc.typehandler.MappingRowMapper;
+import cn.yxffcode.jdbc.typehandler.ResultMap;
 import cn.yxffcode.jdbc.typehandler.NamedParameterJdbcTemplate;
 import cn.yxffcode.jdbc.typehandler.ParamMap;
 import cn.yxffcode.jdbc.typehandler.TypeHandlerRegistry;
@@ -32,7 +32,7 @@ public class Tester {
     user.setName("gaohang");
     namedParameterJdbcTemplate.update("insert into user (id, name) values (:id, :name)", ParamMap.fromNotNull(user));
 
-    List<User> users = namedParameterJdbcTemplate.query("select * from user", new MappingRowMapper<User>(typeHandlerRegistry) {
+    List<User> users = namedParameterJdbcTemplate.query("select * from user", new ResultMap<User>(typeHandlerRegistry) {
       @Override
       protected void configMapping() {
         addMapping("id", "id");
