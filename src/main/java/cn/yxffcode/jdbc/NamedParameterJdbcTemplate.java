@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -82,27 +81,6 @@ public class NamedParameterJdbcTemplate extends org.springframework.jdbc.core.na
 
     private NativeJdbcExtractor nativeJdbcExtractor;
 
-
-    /**
-     * Create a new factory. Will need to add parameters via the
-     * {@link #addParameter} method or have no parameters.
-     */
-    public PreparedStatementCreatorFactory(String sql) {
-      this.sql = sql;
-      this.declaredParameters = new LinkedList<SqlParameter>();
-    }
-
-    /**
-     * Create a new factory with the given SQL and JDBC types.
-     *
-     * @param sql   SQL to execute
-     * @param types int array of JDBC types
-     */
-    public PreparedStatementCreatorFactory(String sql, int... types) {
-      this.sql = sql;
-      this.declaredParameters = SqlParameter.sqlTypesToAnonymousParameterList(types);
-    }
-
     /**
      * Create a new factory with the given SQL and parameters.
      *
@@ -115,85 +93,6 @@ public class NamedParameterJdbcTemplate extends org.springframework.jdbc.core.na
       this.declaredParameters = declaredParameters;
     }
 
-
-    /**
-     * Add a new declared parameter.
-     * <p>Order of parameter addition is significant.
-     *
-     * @param param the parameter to add to the list of declared parameters
-     */
-    public void addParameter(SqlParameter param) {
-      this.declaredParameters.add(param);
-    }
-
-    /**
-     * Set whether to use prepared statements that return a specific type of ResultSet.
-     *
-     * @param resultSetType the ResultSet type
-     * @see java.sql.ResultSet#TYPE_FORWARD_ONLY
-     * @see java.sql.ResultSet#TYPE_SCROLL_INSENSITIVE
-     * @see java.sql.ResultSet#TYPE_SCROLL_SENSITIVE
-     */
-    public void setResultSetType(int resultSetType) {
-      this.resultSetType = resultSetType;
-    }
-
-    /**
-     * Set whether to use prepared statements capable of returning updatable ResultSets.
-     */
-    public void setUpdatableResults(boolean updatableResults) {
-      this.updatableResults = updatableResults;
-    }
-
-    /**
-     * Set whether prepared statements should be capable of returning auto-generated keys.
-     */
-    public void setReturnGeneratedKeys(boolean returnGeneratedKeys) {
-      this.returnGeneratedKeys = returnGeneratedKeys;
-    }
-
-    /**
-     * Set the column names of the auto-generated keys.
-     */
-    public void setGeneratedKeysColumnNames(String... names) {
-      this.generatedKeysColumnNames = names;
-    }
-
-    /**
-     * Specify the NativeJdbcExtractor to use for unwrapping PreparedStatements, if any.
-     */
-    public void setNativeJdbcExtractor(NativeJdbcExtractor nativeJdbcExtractor) {
-      this.nativeJdbcExtractor = nativeJdbcExtractor;
-    }
-
-
-    /**
-     * Return a new PreparedStatementSetter for the given parameters.
-     *
-     * @param params list of parameters (may be {@code null})
-     */
-    public PreparedStatementSetter newPreparedStatementSetter(List<?> params) {
-      return new PreparedStatementCreatorImpl(params != null ? params : Collections.emptyList());
-    }
-
-    /**
-     * Return a new PreparedStatementSetter for the given parameters.
-     *
-     * @param params the parameter array (may be {@code null})
-     */
-    public PreparedStatementSetter newPreparedStatementSetter(Object[] params) {
-      return new PreparedStatementCreatorImpl(params != null ? Arrays.asList(params) : Collections.emptyList());
-    }
-
-    /**
-     * Return a new PreparedStatementCreator for the given parameters.
-     *
-     * @param params list of parameters (may be {@code null})
-     */
-    public PreparedStatementCreator newPreparedStatementCreator(List<?> params) {
-      return new PreparedStatementCreatorImpl(params != null ? params : Collections.emptyList());
-    }
-
     /**
      * Return a new PreparedStatementCreator for the given parameters.
      *
@@ -202,19 +101,6 @@ public class NamedParameterJdbcTemplate extends org.springframework.jdbc.core.na
     public PreparedStatementCreator newPreparedStatementCreator(Object[] params) {
       return new PreparedStatementCreatorImpl(params != null ? Arrays.asList(params) : Collections.emptyList());
     }
-
-    /**
-     * Return a new PreparedStatementCreator for the given parameters.
-     *
-     * @param sqlToUse the actual SQL statement to use (if different from
-     *                 the factory's, for example because of named parameter expanding)
-     * @param params   the parameter array (may be {@code null})
-     */
-    public PreparedStatementCreator newPreparedStatementCreator(String sqlToUse, Object[] params) {
-      return new PreparedStatementCreatorImpl(
-              sqlToUse, params != null ? Arrays.asList(params) : Collections.emptyList());
-    }
-
 
     /**
      * PreparedStatementCreator implementation returned by this class.
